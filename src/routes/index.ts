@@ -1,6 +1,6 @@
 import express from 'express';
-import logger from '../utils/logger';
-import {healthCheck} from '../handler/healthCheck'
+// import logger from '../utils/logger';
+import { healthCheck } from '../handlers/healthcheck';
 
 const router = express.Router();
 
