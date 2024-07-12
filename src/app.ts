@@ -1,5 +1,6 @@
 import createError from 'http-errors';
 import express from 'express';
+import cors from 'cors';
 import path from 'path';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
@@ -11,7 +12,15 @@ import httpLogger from './middlewares/httpLogger';
 import router from './routes/index';
 
 const app: express.Application = express();
+const { FRONT_DOMAIN, FRONT_PORT } = process.env;
 
+app.use(
+  cors({
+    origin: `${FRONT_DOMAIN}:${FRONT_PORT}`, // only for this domain
+    // methods: ['GET', 'POST', 'PUT', 'DELETE'], // allowed methods
+    // allowedHeaders: ['Content-Type', 'Authorization'], // allowed headers
+  }),
+);
 app.use(httpLogger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,7 +39,7 @@ const errorHandler: express.ErrorRequestHandler = (err, _req, res) => {
 };
 app.use(errorHandler);
 
-const port = process.env.PORT || '8000';
+const port = process.env.SERVER_PORT || '8000';
 app.set('port', port);
 
 const server = http.createServer(app);
