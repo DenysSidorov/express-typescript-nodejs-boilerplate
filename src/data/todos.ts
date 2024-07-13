@@ -11,7 +11,27 @@ export const data = {
           id: 1,
           name: 'Buy Tools',
           date: '2025-02-02',
-          completed: true,
+          completed: false,
+          todos: [
+            {
+              id: 1,
+              name: 'Take care',
+              date: '2025-02-02',
+              completed: true,
+            },
+            {
+              id: 13,
+              name: 'Go to market',
+              date: '2025-02-02',
+              completed: true,
+            },
+            {
+              id: 1,
+              name: 'Get money',
+              date: '2025-02-02',
+              completed: false,
+            },
+          ],
         },
         {
           id: 2,
@@ -45,6 +65,14 @@ export const data = {
           name: 'Buy very long portion of meet',
           date: '2025-02-02',
           completed: false,
+          todos: [
+            {
+              id: 13,
+              name: 'Call and order',
+              date: '2025-02-02',
+              completed: false,
+            },
+          ],
         },
         {
           id: 14,
