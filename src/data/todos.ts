@@ -3,7 +3,7 @@ export const data = {
     {
       id: '13145323',
       type: 'list',
-      title: 'CAR',
+      title: 'CAR!',
       color: '#eedb09',
       date: '2025-02-02',
       tasks: [
@@ -56,13 +56,13 @@ export const data = {
     {
       id: '923493249',
       type: 'list',
-      title: 'DAILY',
+      title: 'DAILY!',
       color: '#4885ED',
       date: '2025-02-02',
       tasks: [
         {
-          id: 13,
-          name: 'Buy very long portion of meet',
+          id: '333333333333333333',
+          name: 'One task Buy very long portion of meet',
           date: '2025-02-02',
           completed: false,
           todos: [
