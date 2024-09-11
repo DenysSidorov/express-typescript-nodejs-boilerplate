@@ -13,7 +13,35 @@ router.get('/api/categories', (_, res) => {
 });
 router.get('/api/categories/:id', (req, res) => {
   const id: string = req.params.id;
-  res.send(data.categories.find((el) => el.id === id));
+  const category = data.categories.find((el) => el.id === id);
+  res.send(category || {});
+});
+router.get('/api/categories/:categoryId/tasks ', (req, res) => {
+  const id: string = req.params.categoryId;
+  const category = data.categories.find((el) => el.id === id);
+  res.send(category || {});
+});
+
+router.get('/api/categories/:categoryId/tasks/:taskId', (req, res) => {
+  const categoryId: string = req.params.categoryId;
+  const taskId: string = req.params.taskId;
+  let task = {};
+  const category = data.categories.find((el) => el.id === categoryId);
+  if (category) {
+    const categoryTasks = category?.tasks;
+    if (categoryTasks) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const currentTask: TaskType = categoryTasks.find((el: TaskType) => el.id === taskId);
+      if (currentTask) {
+        task = currentTask;
+        console.log(currentTask);
+      }
+    }
+    // const todos = category?.tasks?.find((el: TaskType) => el.id === taskId);
+    // console.log(tasks);
+  }
+  res.send(task);
 });
 
 router.patch('/api/categories/:id', (req, res) => {
@@ -27,7 +55,7 @@ router.patch('/api/categories/:id', (req, res) => {
     const task = category?.tasks?.find((task: TaskType) => task.id === idTask);
     if (task) {
       task.completed = status;
-      if (task.todos.length > 0) {
+      if (task?.todos?.length > 0) {
         task.todos = task.todos.map((task: TaskType) => ({ ...task, completed: status }));
       }
       res.send(category);

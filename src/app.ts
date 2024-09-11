@@ -31,6 +31,7 @@ app.use('/', router);
 // catch 404 and forward to error handler
 app.use((_req, _res, next) => {
   next(createError(404));
+  // _res.json({ status: '404', message: 'Not found' });
 });
 
 // error handler

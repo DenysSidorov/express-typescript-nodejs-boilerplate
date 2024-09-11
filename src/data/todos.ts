@@ -1,7 +1,8 @@
 export const data = {
   categories: [
+    { id: '11', type: 'list', title: 'CAR!', color: '#eedb09', date: '2025-02-02', tasks: [] },
     {
-      id: '13145323',
+      id: '22',
       type: 'list',
       title: 'CAR!',
       color: '#eedb09',
@@ -23,7 +24,7 @@ export const data = {
               id: 13,
               name: 'Go to market',
               date: '2025-02-02',
-              completed: true,
+              completed: false,
             },
             {
               id: 1,
@@ -54,7 +55,7 @@ export const data = {
       ],
     },
     {
-      id: '923493249',
+      id: '33',
       type: 'list',
       title: 'DAILY!',
       color: '#4885ED',
@@ -113,7 +114,7 @@ export const data = {
       ],
     },
     {
-      id: '23452',
+      id: '44',
       type: 'list',
       title: 'HOME',
       color: '#B8E986',
@@ -140,7 +141,7 @@ export const data = {
       ],
     },
     {
-      id: '2353533',
+      id: '55',
       type: 'count',
       title: 'DRINK WATER',
       color: '#50E3C2',

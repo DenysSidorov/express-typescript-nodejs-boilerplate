@@ -20,6 +20,6 @@ export interface CategoryCountType extends CategoryType {
   goalCount: number;
   currentCount: number;
   tasks?: TaskType[];
-};
+}
 
-type CategoryTypes = 'list' | 'count';
+export type CategoryTypes = 'list' | 'count';
