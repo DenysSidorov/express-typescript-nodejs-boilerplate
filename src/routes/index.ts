@@ -123,4 +123,63 @@ router.patch('/api/categories/:id', (req, res) => {
   }
 });
 
+router.delete('/api/categories/:categoryId/tasks/:taskId/todo', async (req, res) => {
+  const categoryId: string = req.params.categoryId;
+  const taskId: string = req.params.taskId;
+  const { idTodo } = req.body;
+
+  let result = false;
+
+  let indexCategory = -1;
+  let indexTask = -1;
+
+  const category = data.categories.find((el, index) => {
+    if (el.id === categoryId) {
+      indexCategory = index;
+      return true;
+    }
+    return false;
+  });
+  if (category) {
+    const categoryTasks = category?.tasks;
+    if (categoryTasks) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const task: TaskType | undefined = categoryTasks.find((el: TaskType, index: number) => {
+        if (el.id === taskId) {
+          indexTask = index;
+          return true;
+        }
+        return false;
+      });
+      if (task) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        if (data?.categories[indexCategory]?.tasks[indexTask]?.todos) {
+          let deletedIndex = -1;
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          const newTodos = data.categories[indexCategory].tasks[indexTask].todos.filter((todo, index) => {
+            if (todo.id !== idTodo) {
+              return true;
+            } else {
+              deletedIndex = index;
+              return false;
+            }
+          });
+          if (deletedIndex !== -1) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            data.categories[indexCategory].tasks[indexTask].todos = newTodos;
+            result = true;
+          }
+        } else {
+          result = false;
+        }
+      }
+    }
+  }
+  res.send(result);
+});
+
 export default router;
