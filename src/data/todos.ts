@@ -1,6 +1,6 @@
 export const data = {
   categories: [
-    { id: '11', type: 'list', title: 'CAR!', color: '#eedb09', date: '2025-02-02', tasks: [] },
+    { id: '11', type: 'list', title: 'New Stuff!', color: '#eedb09', date: '2025-02-02', tasks: [] },
     {
       id: '22',
       type: 'list',
@@ -15,7 +15,7 @@ export const data = {
           completed: false,
           todos: [
             {
-              id: 1,
+              id: 2131,
               name: 'Take care',
               date: '2025-02-02',
               completed: true,
