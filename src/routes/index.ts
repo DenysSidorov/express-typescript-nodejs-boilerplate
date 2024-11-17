@@ -69,6 +69,9 @@ router.post('/api/categories/:categoryId/tasks/:taskId/todos', async (req, res) 
       const { task, indexTask } = getTaskWithIndex(categoryTasks, taskId);
 
       if (task) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        data?.categories[indexCategory]?.tasks[indexTask]?.completed = false;
         const newTodo = {
           id: Date.now().toString(),
           name: text,
