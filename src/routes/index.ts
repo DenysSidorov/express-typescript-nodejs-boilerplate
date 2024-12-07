@@ -11,26 +11,22 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', healthCheck);
 
-// ok
 router.get('/api/categories', (_, res) => {
   res.send(data);
 });
 
-// ok
 router.get('/api/categories/:id', (req, res) => {
   const id: string = req.params.id;
   const category = getCategoryById(id);
   res.send(category || {});
 });
 
-// ok
 router.get('/api/categories/:categoryId/tasks ', (req, res) => {
   const id: string = req.params.categoryId;
   const category = getCategoryById(id);
   res.send(category || {});
 });
 
-// ok
 router.get('/api/categories/:categoryId/tasks/:taskId/todos', (req, res) => {
   const categoryId: string = req.params.categoryId;
   const taskId: string = req.params.taskId;
@@ -50,15 +46,29 @@ router.get('/api/categories/:categoryId/tasks/:taskId/todos', (req, res) => {
   res.send(todos);
 });
 
-//ok
+router.post('/api/categories/:categoryId/tasks', async (req, res) => {
+  console.log(res);
+  const categoryId: string = req.params.categoryId;
+  const category = getCategoryById(categoryId);
+
+  if (category) {
+    const newTask = {
+      id: '11', // add random id
+      type: 'list',
+      title: 'New Stuff!', //
+      color: '#eedb09', // add random color
+      date: '2025-02-02', // add newDate
+      tasks: [],
+    };
+    console.log(newTask);
+  }
+});
+
 router.post('/api/categories/:categoryId/tasks/:taskId/todos', async (req, res) => {
   const categoryId: string = req.params.categoryId;
   const taskId: string = req.params.taskId;
   const { text } = req.body;
-
   let result = false;
-  // let indexTask = -1;
-
   const { category, indexCategory } = getCategoryWithIndex(categoryId);
 
   if (category) {
@@ -96,7 +106,6 @@ router.post('/api/categories/:categoryId/tasks/:taskId/todos', async (req, res) 
   res.send(result);
 });
 
-//ok
 router.patch('/api/categories/:id', (req, res) => {
   const id: string = req.params.id;
   const { status, idTask } = req.body;
@@ -166,7 +175,6 @@ router.delete('/api/categories/:categoryId/tasks/:taskId/todo', async (req, res)
   res.send(result);
 });
 
-//ok
 router.patch('/api/categories/:categoryId/tasks/:taskId/todo', (req, res) => {
   const categoryId: string = req.params.categoryId;
   const taskId: string = req.params.taskId;
