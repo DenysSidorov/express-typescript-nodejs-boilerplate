@@ -1,9 +1,10 @@
 import express from 'express';
 // import logger from '../utils/logger';
+import randomColor from 'randomcolor';
 import { healthCheck } from '../handlers/healthcheck';
 import { data } from '../data/todos';
 import { TodoType } from '../types/todo';
-import { getCurrentDateTimeFormatted } from '../utils/dates';
+import { getCurrentDateTimeFormatted, getCurrentTodayName } from '../utils/dates';
 import { getCategoryById, getCategoryWithIndex, getTaskById, getTaskWithIndex } from './helpers';
 
 const router = express.Router();
@@ -46,21 +47,45 @@ router.get('/api/categories/:categoryId/tasks/:taskId/todos', (req, res) => {
   res.send(todos);
 });
 
+router.post('/api/categories', async (_, res) => {
+  const newCategory = {
+    id: Date.now().toString(),
+    type: 'list',
+    title: getCurrentTodayName(),
+    tasks: [],
+    date: getCurrentDateTimeFormatted(),
+    color: randomColor(),
+  };
+  data.categories.push(newCategory);
+  res.send(newCategory);
+});
+
 router.post('/api/categories/:categoryId/tasks', async (req, res) => {
-  console.log(res);
   const categoryId: string = req.params.categoryId;
+  const { title, todos } = req.body;
+  console.log(title, todos);
+
   const category = getCategoryById(categoryId);
 
   if (category) {
     const newTask = {
-      id: '11', // add random id
-      type: 'list',
-      title: 'New Stuff!', //
-      color: '#eedb09', // add random color
-      date: '2025-02-02', // add newDate
-      tasks: [],
+      id: Date.now().toString(),
+      name: title,
+      date: getCurrentDateTimeFormatted(),
+      todos,
     };
-    console.log(newTask);
+    if (category.tasks) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      category.tasks.push(newTask);
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      category.tasks = [newTask];
+    }
+    res.send(true);
+  } else {
+    res.status(400).json({ message: `No Category with id: ${categoryId}` });
   }
 });
 

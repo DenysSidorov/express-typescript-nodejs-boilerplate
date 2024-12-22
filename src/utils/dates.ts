@@ -12,4 +12,6 @@ export const getCurrentDateTimeFormatted = (): string => {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
 
-// console.log(getCurrentDateTimeFormatted());  // "2024-09-12 14:35:20"
+export const getCurrentTodayName = (): string => {
+  return new Date().toLocaleDateString(undefined, { weekday: 'long' });
+};

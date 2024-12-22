@@ -140,14 +140,14 @@ export const data = {
         },
       ],
     },
-    {
-      id: '55',
-      type: 'count',
-      title: 'DRINK WATER',
-      color: '#50E3C2',
-      date: '2025-02-02',
-      goalCount: 8,
-      currentCount: 3,
-    },
+    // {
+    //   id: '55',
+    //   type: 'count',
+    //   title: 'DRINK WATER',
+    //   color: '#50E3C2',
+    //   date: '2025-02-02',
+    //   goalCount: 8,
+    //   currentCount: 3,
+    // },
   ],
 };
