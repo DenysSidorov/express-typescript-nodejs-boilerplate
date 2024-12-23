@@ -1,11 +1,16 @@
 import express from 'express';
 // import logger from '../utils/logger';
 import randomColor from 'randomcolor';
+import { uniqueNamesGenerator, Config, animals } from 'unique-names-generator';
 import { healthCheck } from '../handlers/healthcheck';
 import { data } from '../data/todos';
 import { TodoType } from '../types/todo';
-import { getCurrentDateTimeFormatted, getCurrentTodayName } from '../utils/dates';
+import { getCurrentDateTimeFormatted } from '../utils/dates';
 import { getCategoryById, getCategoryWithIndex, getTaskById, getTaskWithIndex } from './helpers';
+
+const config: Config = {
+  dictionaries: [animals],
+};
 
 const router = express.Router();
 
@@ -48,10 +53,11 @@ router.get('/api/categories/:categoryId/tasks/:taskId/todos', (req, res) => {
 });
 
 router.post('/api/categories', async (_, res) => {
+  const uniqName = uniqueNamesGenerator(config);
   const newCategory = {
     id: Date.now().toString(),
     type: 'list',
-    title: getCurrentTodayName(),
+    title: uniqName.charAt(0).toUpperCase() + uniqName.substring(1),
     tasks: [],
     date: getCurrentDateTimeFormatted(),
     color: randomColor(),

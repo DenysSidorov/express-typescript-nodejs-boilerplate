@@ -5,7 +5,7 @@ export const data = {
       id: '22',
       type: 'list',
       title: 'CAR!',
-      color: '#eedb09',
+      color: '#d1bbf7',
       date: '2025-02-02',
       tasks: [
         {
