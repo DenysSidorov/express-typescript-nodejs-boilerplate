@@ -139,7 +139,21 @@ router.post('/api/categories/:categoryId/tasks/:taskId/todos', async (req, res) 
 
 router.patch('/api/categories/:id', (req, res) => {
   const id: string = req.params.id;
-  const { status, idTask } = req.body;
+  const { title } = req.body;
+  const category = getCategoryById(id);
+
+  if (category) {
+    category.title = title;
+    res.send(category);
+  } else {
+    res.status(400).json({ message: `No Category with id: ${id}` });
+  }
+});
+
+router.patch('/api/categories/:id/tasks/:idTask', (req, res) => {
+  const id: string = req.params.id;
+  const idTask: string = req.params.idTask;
+  const { status } = req.body;
   const category = getCategoryById(id);
 
   if (category) {
