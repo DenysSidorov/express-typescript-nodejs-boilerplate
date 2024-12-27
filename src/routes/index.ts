@@ -251,6 +251,23 @@ router.patch('/api/categories/:categoryId/tasks/:taskId/todo', (req, res) => {
   }
 });
 
+router.delete('/api/categories/:id', async (req, res) => {
+  const categoryId: string = req.params.id;
+  const { category, indexCategory } = getCategoryWithIndex(categoryId);
+  if (category) {
+    let isRemoved = false;
+    data.categories = data.categories.filter((_, ind) => {
+      if (String(ind) === String(indexCategory)) {
+        isRemoved = true;
+      }
+      return ind !== indexCategory;
+    });
+    res.send(isRemoved);
+  } else {
+    res.status(400).json({ message: `No Category with id: ${categoryId}` });
+  }
+});
+
 router.delete('/api/categories/:categoryId/tasks/:taskId', async (req, res) => {
   const categoryId: string = req.params.categoryId;
   const taskId: string = req.params.taskId;
