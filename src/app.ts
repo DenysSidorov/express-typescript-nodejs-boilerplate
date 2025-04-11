@@ -16,7 +16,7 @@ const { FRONT_DOMAIN, FRONT_PORT } = process.env;
 
 app.use(
   cors({
-    origin: `${FRONT_DOMAIN}:${FRONT_PORT}`, // only for this domain
+    origin: `${FRONT_DOMAIN}${FRONT_PORT ? ':' + FRONT_PORT : ''}`, // only for this domain
     // methods: ['GET', 'POST', 'PUT', 'DELETE'], // allowed methods
     // allowedHeaders: ['Content-Type', 'Authorization'], // allowed headers
   }),
@@ -40,7 +40,7 @@ const errorHandler: express.ErrorRequestHandler = (err, _req, res) => {
 };
 app.use(errorHandler);
 
-const port = process.env.SERVER_PORT || '8000';
+const port = process.env.PORT || '8000';
 app.set('port', port);
 
 const server = http.createServer(app);
