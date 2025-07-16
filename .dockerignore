@@ -1,3 +1,38 @@
+# dependencies
 node_modules
-npm-debug.log
+
+# build output
+dist
+build
+
+# local files
 .env
+.env.local
+.env.development
+.env.production
+
+# Git
+.git
+.gitignore
+
+# logs nd temp files
+npm-debug.log
+yarn-error.log
+*.log
+
+# editor and OS files
+.DS_Store
+.vscode
+.idea
+
+# test and coverage files
+coverage
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+
+# documentation and related files
+README.md
+LICENSE
+docs/
